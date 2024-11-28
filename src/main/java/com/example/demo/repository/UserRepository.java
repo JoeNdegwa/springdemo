@@ -11,7 +11,9 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends MongoRepository<User, Long> {
 
-    Optional<User> findById(Long id);
+    Optional<User> findById(long id);
 
     List<User> findAll();
+
+    boolean existsById(long id);
 }

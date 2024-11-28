@@ -20,7 +20,7 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public Optional<User> getUserByName(@RequestParam(value = "id") Long id) {
+    public Optional<User> getUserByName(@RequestParam(value = "id") long id) {
         return userService.getUserById(id);
     }
 

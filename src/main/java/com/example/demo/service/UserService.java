@@ -16,6 +16,9 @@ import java.util.Optional;
 @Service
 public class UserService {
 
+    // Max attempts to generate unique customer ID
+    private static final int MAX_ATTEMPTS = 10;
+
     UserRepository userRepository;
     @Autowired
     private SequenceGeneratorService sequenceGeneratorService;
@@ -36,8 +39,17 @@ public class UserService {
     public User saveUser(String phoneNumber, int nationalID, String firstName, String middleName, String lastName,
                          String email, Date dob, String occupation, Gender gender, MaritalStatus maritalStatus,
                          Address address, String kraPIN, LocalDateTime createdAt) {
-        long id = sequenceGeneratorService.generateSequence("customer_sequence");
-        User user = new User(id, phoneNumber, nationalID, firstName, middleName, lastName,
+        long customerId;
+        int attempt = 0;
+        do {
+            customerId = sequenceGeneratorService.generateUniqueId();
+            attempt++;
+            if (attempt > MAX_ATTEMPTS) {
+                throw new RuntimeException("Failed to generate a unique customer ID after " + MAX_ATTEMPTS + " attempts.");
+            }
+        } while (userRepository.existsById(customerId));
+
+        User user = new User(customerId, phoneNumber, nationalID, firstName, middleName, lastName,
                 email, dob, occupation, gender, maritalStatus, address, kraPIN, LocalDateTime.now());
 
         return  userRepository.save(user);

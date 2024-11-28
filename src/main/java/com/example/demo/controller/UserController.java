@@ -32,10 +32,18 @@ public class UserController {
     @PostMapping("/register")
     public User saveUser(@RequestBody User user) {
         return userService.saveUser(
-                user.getId(),
-                user.getName(),
-                user.getAge(),
-                user.getEmail()
+                user.getPhoneNumber(),
+                user.getNationalID(),
+                user.getFirstName(),
+                user.getMiddleName(),
+                user.getLastName(),
+                user.getEmail(),
+                user.getDob(),
+                user.getOccupation(),
+                user.getGender(),
+                user.getMaritalStatus(),
+                user.getAddress(),
+                user.getKraPIN()
         );
     }
 }

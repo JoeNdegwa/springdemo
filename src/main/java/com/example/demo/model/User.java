@@ -5,6 +5,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -28,11 +29,12 @@ public class User {
     private Address address;
     @Indexed(unique = true)
     private String kraPIN;
+    private LocalDateTime createdAt;
 
     public User(long id, String phoneNumber, int nationalID, String firstName,
                 String middleName, String lastName, String email, Date dob,
                 String occupation, Gender gender, MaritalStatus maritalStatus,
-                Address address, String kraPIN) {
+                Address address, String kraPIN, LocalDateTime createdAt) {
         this.id = id;
         this.phoneNumber = phoneNumber;
         this.nationalID = nationalID;
@@ -46,6 +48,7 @@ public class User {
         this.maritalStatus = maritalStatus;
         this.address = address;
         this.kraPIN = kraPIN;
+        this.createdAt = createdAt;
     }
 
 }

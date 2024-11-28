@@ -8,6 +8,7 @@ import com.example.demo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -34,10 +35,10 @@ public class UserService {
 
     public User saveUser(String phoneNumber, int nationalID, String firstName, String middleName, String lastName,
                          String email, Date dob, String occupation, Gender gender, MaritalStatus maritalStatus,
-                         Address address, String kraPIN) {
+                         Address address, String kraPIN, LocalDateTime createdAt) {
         long id = sequenceGeneratorService.generateSequence("customer_sequence");
         User user = new User(id, phoneNumber, nationalID, firstName, middleName, lastName,
-                email, dob, occupation, gender, maritalStatus, address, kraPIN);
+                email, dob, occupation, gender, maritalStatus, address, kraPIN, LocalDateTime.now());
 
         return  userRepository.save(user);
     }

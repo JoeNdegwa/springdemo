@@ -43,7 +43,8 @@ public class UserController {
                 user.getGender(),
                 user.getMaritalStatus(),
                 user.getAddress(),
-                user.getKraPIN()
+                user.getKraPIN(),
+                user.getCreatedAt()
         );
     }
 }

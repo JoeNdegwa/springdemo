@@ -2,17 +2,23 @@ package com.example.demo.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
-@Document("customers")
+@Document("users")
 public class User {
+    @Transient
+    public static final String SEQUENCE_NAME = "users_sequence";
+
     @Id
-    private long id;
+    private BigInteger id;
+    private Salutation salutation;
     @Indexed(unique = true)
     private String phoneNumber;
     @Indexed(unique = true)
@@ -30,12 +36,20 @@ public class User {
     @Indexed(unique = true)
     private String kraPIN;
     private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
+    private KYC kycStatus;
+    private SELFIE selfieStatus;
+    private CRB crbStatus;
+    private String username;
+    private String password;
 
-    public User(long id, String phoneNumber, int nationalID, String firstName,
+    public User(BigInteger id, Salutation salutation, String phoneNumber, int nationalID, String firstName,
                 String middleName, String lastName, String email, Date dob,
                 String occupation, Gender gender, MaritalStatus maritalStatus,
-                Address address, String kraPIN, LocalDateTime createdAt) {
+                Address address, String kraPIN, LocalDateTime createdAt, LocalDateTime modifiedAt,
+                KYC kycStatus, SELFIE selfieStatus, CRB crbStatus, String username, String password) {
         this.id = id;
+        this.salutation = salutation;
         this.phoneNumber = phoneNumber;
         this.nationalID = nationalID;
         this.firstName = firstName;
@@ -49,6 +63,12 @@ public class User {
         this.address = address;
         this.kraPIN = kraPIN;
         this.createdAt = createdAt;
+        this.modifiedAt = modifiedAt;
+        this.kycStatus = kycStatus;
+        this.selfieStatus = selfieStatus;
+        this.crbStatus = crbStatus;
+        this.username = username;
+        this.password = password;
     }
 
 }

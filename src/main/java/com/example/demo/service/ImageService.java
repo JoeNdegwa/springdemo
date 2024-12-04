@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.model.LoadImage;
 import com.example.demo.repository.ImageRepository;
 import com.example.demo.util.ImageUtils;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.exception.ContextedRuntimeException;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,13 @@ import java.util.Optional;
 import java.util.zip.DataFormatException;
 
 @Service
-@RequiredArgsConstructor
 public class ImageService {
 
     private final ImageRepository imageRepository;
+
+    public ImageService(ImageRepository imageRepository) {
+        this.imageRepository = imageRepository;
+    }
 
     public String uploadImage(MultipartFile imageFile) throws IOException {
         var imageToSave = LoadImage.builder()

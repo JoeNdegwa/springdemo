@@ -32,6 +32,7 @@ public class UserController {
     @PostMapping("/register")
     public User saveUser(@RequestBody User user) {
         return userService.saveUser(
+                user.getSalutation(),
                 user.getPhoneNumber(),
                 user.getNationalID(),
                 user.getFirstName(),
@@ -44,7 +45,13 @@ public class UserController {
                 user.getMaritalStatus(),
                 user.getAddress(),
                 user.getKraPIN(),
-                user.getCreatedAt()
+                user.getCreatedAt(),
+                user.getModifiedAt(),
+                user.getKycStatus(),
+                user.getSelfieStatus(),
+                user.getCrbStatus(),
+                user.getUsername(),
+                user.getPassword()
         );
     }
 }

@@ -19,14 +19,15 @@ public class UserController {
         this.userService = userService;
     }
 
+    // This API is not working
     @GetMapping("/user")
-    public Optional<User> getUserByName(@RequestParam(value = "id") long id) {
+    public Optional<User> getUserByName(@RequestParam(value = "id") Integer id) {
         return userService.getUserById(id);
     }
 
     @GetMapping("/user/all")
     public List<User> getAll() {
-        return userService.getAll();
+        return userService.getAllUsers();
     }
 
     @PostMapping("/register")
@@ -43,7 +44,6 @@ public class UserController {
                 user.getOccupation(),
                 user.getGender(),
                 user.getMaritalStatus(),
-                user.getAddress(),
                 user.getKraPIN(),
                 user.getCreatedAt(),
                 user.getModifiedAt(),
